@@ -1,10 +1,7 @@
 package csc.processor;
 
 import csc.processor.command.*;
-import csc.processor.register.DataRegister;
-import csc.processor.register.InstructionRegister;
-import csc.processor.register.Register;
-import csc.processor.register.SpecialPurposeRegister;
+import csc.processor.register.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,17 +62,17 @@ public class Main {
         registerMap.put("R4", new DataRegister(SIZE, "R4")); // register4
         registerMap.put("PC", new SpecialPurposeRegister(SIZE, "PC", 1)); // programCounter
         registerMap.put("TC", new SpecialPurposeRegister(SIZE, "TC")); // timeCounter
-        registerMap.put("PS", new SpecialPurposeRegister(SIZE, "PS")); // programSate
+        registerMap.put("PS", new ProgramSateRegister(SIZE, "PS")); // programSate
         registerMap.put("A", new DataRegister(SIZE, "A ")); // accumulator
 
-        commandMap.put("mov", new MoveCommand("mov"));
+        commandMap.put("mov", new MoveCommand("mov", SIZE));
         commandMap.put("save", new SaveCommand("save"));
-        commandMap.put("inv", new InversionCommand("inv"));
-        commandMap.put("add", new AddCommand("add"));
-        commandMap.put("sub", new SubtractCommand("sub"));
-        commandMap.put("mod", new ModCommand("mod"));
-        commandMap.put("and", new AndCommand("and"));
-        commandMap.put("or", new OrCommand("or"));
+        commandMap.put("inv", new InversionCommand("inv", SIZE));
+        commandMap.put("add", new AddCommand("add", SIZE));
+        commandMap.put("sub", new SubtractCommand("sub", SIZE));
+        commandMap.put("mod", new ModCommand("mod", SIZE));
+        commandMap.put("and", new AndCommand("and", SIZE));
+        commandMap.put("or", new OrCommand("or", SIZE));
     }
 
     private static void printState(String command) {

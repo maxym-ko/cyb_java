@@ -3,8 +3,8 @@ package csc.processor.command;
 import csc.processor.register.Register;
 
 public class MoveCommand extends ValueCommand {
-    public MoveCommand(String name) {
-        super(name);
+    public MoveCommand(String name, int size) {
+        super(name, size);
     }
 
     @Override

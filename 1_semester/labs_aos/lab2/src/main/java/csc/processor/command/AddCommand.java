@@ -3,8 +3,8 @@ package csc.processor.command;
 import csc.processor.register.Register;
 
 public class AddCommand extends ValueCommand {
-    public AddCommand(String name) {
-        super(name);
+    public AddCommand(String name, int size) {
+        super(name, size);
     }
 
     @Override
