@@ -4,14 +4,10 @@ import csc.processor.register.Register;
 
 import java.util.Map;
 
-public class SaveCommand implements Command {
+public class SaveCommand extends OperandCommand {
     @Override
-    public void execute(String operand, Map<String, Register> registerMap) {
-        Register accumulator = registerMap.get("A");
+    protected void execute0(Map<String, Register> registerMap, Register accumulator, String operand) {
         Register dataRegister = registerMap.get(operand);
         dataRegister.setValue(accumulator.getValue());
-
-        Register programSate = registerMap.get("PS");
-        programSate.setValue(accumulator.getOlderBit());
     }
 }
