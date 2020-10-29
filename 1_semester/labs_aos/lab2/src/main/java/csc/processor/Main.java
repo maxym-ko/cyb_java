@@ -17,8 +17,8 @@ public class Main {
     private static final Map<String, Command> commandMap = new TreeMap<>();
     private static final int SIZE = 18;
 
-    public static void main(String[] args) throws FileNotFoundException {
-        if (args.length != 1) System.out.println("There should be one argument (file name)");
+    public static void main(String[] args) throws Exception {
+        if (args.length != 1) throw new IllegalArgumentException("There should be one argument (file name)");
 
         init();
         CommandReader commandReader = new CommandReader(args[0]);
@@ -41,6 +41,7 @@ public class Main {
             scanner.nextLine();
 
             Command commandExecutor = commandMap.get(code);
+            if (commandExecutor == null) throw new IllegalArgumentException("There is no such a command code");
             commandExecutor.execute(operand, registerMap);
             registerMap.get("TC").addValue(1);
             printState(command);
@@ -67,14 +68,14 @@ public class Main {
         registerMap.put("PS", new SpecialPurposeRegister(SIZE, "PS")); // programSate
         registerMap.put("A", new DataRegister(SIZE, "A ")); // accumulator
 
-        commandMap.put("mov", new MoveCommand());
-        commandMap.put("save", new SaveCommand());
-        commandMap.put("inv", new InversionCommand());
-        commandMap.put("add", new AddCommand());
-        commandMap.put("sub", new SubtractCommand());
-        commandMap.put("mod", new ModCommand());
-        commandMap.put("and", new AndCommand());
-        commandMap.put("or", new OrCommand());
+        commandMap.put("mov", new MoveCommand("mov"));
+        commandMap.put("save", new SaveCommand("save"));
+        commandMap.put("inv", new InversionCommand("inv"));
+        commandMap.put("add", new AddCommand("add"));
+        commandMap.put("sub", new SubtractCommand("sub"));
+        commandMap.put("mod", new ModCommand("mod"));
+        commandMap.put("and", new AndCommand("and"));
+        commandMap.put("or", new OrCommand("or"));
     }
 
     private static void printState(String command) {
@@ -102,8 +103,16 @@ public class Main {
             if (!scanner.hasNext()) return null;
             String command = scanner.nextLine();
             commandArray = command.split("\\s");
+            validate(commandArray);
 
             return command;
+        }
+
+        void validate(String[] array) {
+            if (array.length != 2)
+                throw new IllegalArgumentException("The command should match format 'command_code operand'");
+            if (array[0].matches(".*\\d.*"))
+                throw new IllegalArgumentException("The command code can't contain digits");
         }
 
         String getCode() {

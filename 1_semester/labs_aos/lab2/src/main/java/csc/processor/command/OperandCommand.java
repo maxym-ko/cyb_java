@@ -5,6 +5,11 @@ import csc.processor.register.Register;
 import java.util.Map;
 
 public abstract class OperandCommand implements Command {
+    private String name;
+    OperandCommand(String name) {
+        this.name = name;
+    }
+
     @Override
     public void execute(String operand, Map<String, Register> registerMap) {
         Register accumulator = registerMap.get("A");
@@ -13,5 +18,10 @@ public abstract class OperandCommand implements Command {
         Register programSate = registerMap.get("PS");
         programSate.setValue(accumulator.getOlderBit());
     }
+
     protected abstract void execute0(Map<String, Register> registerMap, Register accumulator, String operand);
+
+    public String getName() {
+        return name;
+    }
 }

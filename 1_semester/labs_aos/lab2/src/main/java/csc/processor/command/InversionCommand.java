@@ -3,6 +3,10 @@ package csc.processor.command;
 import csc.processor.register.Register;
 
 public class InversionCommand extends ValueCommand {
+    public InversionCommand(String name) {
+        super(name);
+    }
+
     @Override
     protected void execute0(Register accumulator, int value) {
         StringBuilder binary = new StringBuilder(
