@@ -5,7 +5,7 @@ import csc.processor.register.Register;
 import java.util.Map;
 
 public abstract class OperandCommand implements Command {
-    private String name;
+    private final String name;
     OperandCommand(String name) {
         this.name = name;
     }

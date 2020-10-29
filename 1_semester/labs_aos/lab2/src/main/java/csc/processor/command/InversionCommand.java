@@ -22,14 +22,12 @@ public class InversionCommand extends ValueCommand {
     }
 
 //    @Override
-//    public void execute(String operand, Map<String, Register> registerMap) {
-//        Register accumulator = registerMap.get("A");
+//    protected void execute0(Register accumulator, int value) {
 //        StringBuilder binary = new StringBuilder(
 //                String.format("%" + accumulator.getSize() + "s", Integer.toBinaryString(accumulator.getValue()), 2)
 //                        .replace(" ", "0"));
-//        int indicator = Integer.parseInt(operand);
+//        int indicator = value;
 //        int i = indicator == 0 ? 0 : 1;
-//        System.out.println(binary);
 //        for (; i < binary.length(); i += 2) {
 //            char change = binary.charAt(i) == '0' ? '1' : '0';
 //            binary.setCharAt(i, change);

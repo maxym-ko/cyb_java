@@ -5,7 +5,7 @@ import csc.processor.register.Register;
 import java.util.Map;
 
 public abstract class ValueCommand implements Command {
-    private String name;
+    private final String name;
 
     ValueCommand(String name) {
         this.name = name;
