@@ -6,6 +6,11 @@ public class DataRegister extends Register {
     }
 
     @Override
+    public boolean isOverflowed() {
+        return getValue() > Math.pow(2, getSize()) - 1;
+    }
+
+    @Override
     public String toString() {
         return getName() + " = " + getBinaryFormatted(Integer.toBinaryString(getValue()));
     }

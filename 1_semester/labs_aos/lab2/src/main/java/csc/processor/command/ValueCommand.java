@@ -1,5 +1,6 @@
 package csc.processor.command;
 
+import csc.processor.register.AccumulatorRegister;
 import csc.processor.register.ProgramSateRegister;
 import csc.processor.register.Register;
 
@@ -16,18 +17,20 @@ public abstract class ValueCommand implements Command {
 
     @Override
     public void execute(String operand, Map<String, Register> registerMap) {
-        Register accumulator = registerMap.get("A");
+        AccumulatorRegister accumulator = (AccumulatorRegister) registerMap.get("A");
         int value;
         try {
             value = Integer.parseInt(operand);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Command '" + name + "' should contain integer operand");
         }
+
+        accumulator.commit();
         execute0(accumulator, value);
 
-        if (accumulator.getValue() > Math.pow(2, size)) {
+        if (accumulator.isOverflowed()) {
             ((ProgramSateRegister) registerMap.get("PS")).setIsOverflow(1);
-//            accumulator.setValue(0);
+            accumulator.rollback();
         }
 
         Register programSate = registerMap.get("PS");

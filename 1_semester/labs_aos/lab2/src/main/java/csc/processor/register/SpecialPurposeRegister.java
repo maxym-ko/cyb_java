@@ -13,4 +13,9 @@ public class SpecialPurposeRegister extends Register {
     public String toString() {
         return getName() + " = " + getValue();
     }
+
+    @Override
+    public boolean isOverflowed() {
+        return false;
+    }
 }

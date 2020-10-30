@@ -32,8 +32,7 @@ public class Main {
             code = commandReader.getCode();
             operand = commandReader.getOperand();
 
-
-            updateInstructionRegister(code, operand);
+            if (!updateInstructionRegisterAndOverflow(code, operand)) continue;
             printState(command);
             scanner.nextLine();
 
@@ -48,10 +47,19 @@ public class Main {
 
     }
 
-    private static void updateInstructionRegister(String command, String operand) {
+    private static boolean updateInstructionRegisterAndOverflow(String command, String operand) {
+        ((ProgramSateRegister) registerMap.get("PS")).setIsOverflow(0);
+
         InstructionRegister instructionRegister = (InstructionRegister) registerMap.get("IR");
         instructionRegister.setCommand(command);
+        instructionRegister.commit();
         instructionRegister.setOperand(operand);
+        if (instructionRegister.isOverflowed()) {
+            instructionRegister.rollback();
+            System.out.println("The command '" + command + " " + operand + "' was skipped due to the overflow");
+            return false;
+        }
+        return true;
     }
 
     private static void init() {
@@ -63,7 +71,7 @@ public class Main {
         registerMap.put("PC", new SpecialPurposeRegister(SIZE, "PC", 1)); // programCounter
         registerMap.put("TC", new SpecialPurposeRegister(SIZE, "TC")); // timeCounter
         registerMap.put("PS", new ProgramSateRegister(SIZE, "PS")); // programSate
-        registerMap.put("A", new DataRegister(SIZE, "A ")); // accumulator
+        registerMap.put("A", new AccumulatorRegister(SIZE, "A ")); // accumulator
 
         commandMap.put("mov", new MoveCommand("mov", SIZE));
         commandMap.put("save", new SaveCommand("save"));

@@ -5,15 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class Register {
-    private String name;
+    private final String name;
     private int value;
-    private int size;
+    private final int size;
 
     Register(String name, int value, int size) {
         this.name = name;
         this.value = value;
         this.size = size;
     }
+
+    public abstract boolean isOverflowed();
 
     protected String getBinaryFormatted(String binary) {
         if (binary.length() > getSize()) binary = binary.substring(binary.length() - getSize());
@@ -31,7 +33,6 @@ public abstract class Register {
         return String.join(" ", result);
     }
 
-
 //    protected String getBinaryFormatted(String binary) {
 //        if (binary.length() > getSize()) binary = binary.substring(binary.length() - getSize());
 //
@@ -44,6 +45,7 @@ public abstract class Register {
 //        }
 //
 //        return String.join(" ", result);
+
 //    }
 
     public int getOlderBit() {
