@@ -48,10 +48,8 @@ public abstract class Register {
 
 //    }
 
-    public int getOlderBit() {
-        String binary = Integer.toBinaryString(value);
-        if (binary.length() < getSize()) return 0;
-        return binary.charAt(0) - '0';
+    public int getSign() {
+        return value > 0 ? 0 : 1;
     }
 
     public void addValue(int addition) {

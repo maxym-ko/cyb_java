@@ -16,7 +16,7 @@ public abstract class OperandCommand implements Command {
         execute0(registerMap, accumulator, operand);
 
         Register programSate = registerMap.get("PS");
-        programSate.setValue(accumulator.getOlderBit());
+        programSate.setValue(accumulator.getSign());
     }
 
     protected abstract void execute0(Map<String, Register> registerMap, Register accumulator, String operand);

@@ -34,7 +34,7 @@ public abstract class ValueCommand implements Command {
         }
 
         Register programSate = registerMap.get("PS");
-        programSate.setValue(accumulator.getOlderBit());
+        programSate.setValue(accumulator.getSign());
     }
 
     protected abstract void execute0(Register accumulator, int value);
