@@ -8,10 +8,6 @@ public class ProgramStateRegister {
         this.overflowed = overflowed;
     }
 
-    public boolean isOverflowed() {
-        return overflowed;
-    }
-
     public void setLastCommandPositive(boolean positive) {
         this.isLastCommandPositive = positive;
     }

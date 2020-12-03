@@ -5,10 +5,11 @@ import csc.coprocessor.converter.BinaryConverter;
 public class DataRegister {
     private double value;
     private final BinaryConverter binaryConverter;
+    private boolean isOverflowed;
 
     public DataRegister(double value, int characteristicCapacity, int mantissaCapacity) {
-        this.value = value;
         binaryConverter = new BinaryConverter(characteristicCapacity, mantissaCapacity);
+        setValue(value);
     }
 
     public double getValue() {
@@ -16,11 +17,23 @@ public class DataRegister {
     }
 
     public void setValue(double value) {
-        this.value = value;
+        double tmp = value % binaryConverter.getMaxValue();
+        if (value < binaryConverter.getMaxValue()) {
+            isOverflowed = false;
+            this.value = value;
+        } else if ((int) (value / binaryConverter.getMaxValue()) % 2 == 0) {
+            isOverflowed = true;
+            this.value = tmp;
+        } else {
+            isOverflowed = true;
+            this.value = -tmp;
+        }
     }
 
     public boolean isOverflowed() {
-        return value > binaryConverter.getMaxValue() || value < binaryConverter.getMinValue();
+        boolean res = isOverflowed;
+        isOverflowed = false;
+        return res;
     }
 
     @Override

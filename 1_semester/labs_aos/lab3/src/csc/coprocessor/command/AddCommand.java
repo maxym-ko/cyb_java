@@ -2,7 +2,8 @@ package csc.coprocessor.command;
 
 public class AddCommand extends BiFuncCommand {
     public AddCommand() {
-        super("FADDP ST(0) ST(1)", "### Додаємо два верхні значення зі стеку; результат залишається на вершині");
+        super("FADDP ST(0) ST(1)", "### Додаємо два верхні значення зі стеку та викидуємо їх; " +
+                "результат залишається на вершині");
     }
 
     @Override

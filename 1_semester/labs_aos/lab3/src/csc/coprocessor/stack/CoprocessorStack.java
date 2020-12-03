@@ -43,7 +43,7 @@ public class CoprocessorStack {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder("name  s ch  man\n");
+        StringBuilder res = new StringBuilder("name   s ch  man\n");
         int i = 0;
         for (DataRegister register : registers) {
             res.append("P");

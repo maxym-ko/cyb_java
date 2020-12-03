@@ -9,6 +9,19 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+//        BinaryConverter converter = new BinaryConverter(3, 9);
+//        System.out.println(converter.convertToIEEE754(-17));
+////        System.out.println(converter.convertToIEEE754(0.01));
+//        System.out.println(converter.getAbsMin());
+//        System.out.println(converter.getMax());
+//        System.out.println(converter.getMin());
+//        System.out.println(converter.convertToIEEE754(1));
+////       System.out.println(converter.convertToIEEE754(17));
+//        System.out.println(converter.getPositiveInfinity());
+//        System.out.println(converter.convertToIEEE754(-17));
+////        System.out.println(converter.getNegativeInfinity());
+//        System.out.println(converter.getNan());
+//        System.exit(0);
         System.out.println("Ця лабораторна робота симулює роботу математичного сопроцесора та " +
                 "демонструє обрахунок наступного виразу: ln(y)*cos(x) + 3*tg(x)\n");
 
@@ -49,8 +62,5 @@ public class Main {
     private static void checkState(CoprocessorStack stack, ProgramStateRegister stateRegister) {
         stateRegister.setOverflowed(stack.isTopValueOverflowed());
         stateRegister.setLastCommandPositive(stack.peek().getValue() > 0);
-        if (stateRegister.isOverflowed()) {
-            stack.peek().setValue(0);
-        }
     }
 }

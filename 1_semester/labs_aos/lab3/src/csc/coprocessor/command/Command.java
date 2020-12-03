@@ -15,6 +15,6 @@ public abstract class Command {
 
     @Override
     public String toString() {
-        return name + "\t" + comment;
+        return "command = " + name + "\t\t" + comment;
     }
 }
