@@ -1,7 +1,7 @@
-package csc.nonlinear.system.util;
+package csc.linear.system.util;
 
-import csc.nonlinear.system.dto.Matrix;
-import csc.nonlinear.system.dto.Vector;
+import csc.linear.system.domain.Matrix;
+import csc.linear.system.domain.Vector;
 
 public class NonlinearEquations {
 

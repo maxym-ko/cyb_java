@@ -1,4 +1,4 @@
-package csc.nonlinear.system.dto;
+package csc.linear.system.domain;
 
 public class Vector {
 

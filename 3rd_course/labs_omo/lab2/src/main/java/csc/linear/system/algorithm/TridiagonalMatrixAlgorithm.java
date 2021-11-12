@@ -1,8 +1,8 @@
-package csc.nonlinear.system.algorithm;
+package csc.linear.system.algorithm;
 
-import csc.nonlinear.system.dto.Matrix;
-import csc.nonlinear.system.dto.NonlinearEquation;
-import csc.nonlinear.system.dto.Vector;
+import csc.linear.system.domain.Matrix;
+import csc.linear.system.domain.Vector;
+import csc.linear.system.domain.NonlinearEquation;
 
 import java.util.*;
 
@@ -11,17 +11,17 @@ public class TridiagonalMatrixAlgorithm extends AbstractAlgorithm<NonlinearEquat
     @Override
     public boolean checkConditions(NonlinearEquation equation) {
         Matrix matrix = equation.getMatrix();
-        Vector vector = equation.getVector();
+        csc.linear.system.domain.Vector vector = equation.getVector();
 
         return vector.getSize() == matrix.getRow() && matrix.isQuadratic() && matrix.isTridiagonal();
     }
 
     @Override
-    Vector solve0(NonlinearEquation equation) {
+    csc.linear.system.domain.Vector solve0(NonlinearEquation equation) {
         transform(equation);
 
         Matrix matrix = equation.getMatrix();
-        Vector vector = equation.getVector();
+        csc.linear.system.domain.Vector vector = equation.getVector();
         int eqSize = matrix.getRow();
 
         List<Double> alphas = new ArrayList<>();
@@ -58,7 +58,7 @@ public class TridiagonalMatrixAlgorithm extends AbstractAlgorithm<NonlinearEquat
 
         Collections.reverse(yN);
 
-        Vector res = new Vector(eqSize);
+        csc.linear.system.domain.Vector res = new csc.linear.system.domain.Vector(eqSize);
         for (int i = 0; i < eqSize; i++) {
             res.set(i, yN.get(i));
         }

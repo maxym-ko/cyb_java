@@ -1,9 +1,9 @@
-package csc.nonlinear.system.algorithm;
+package csc.linear.system.algorithm;
 
-import csc.nonlinear.system.dto.Matrix;
-import csc.nonlinear.system.dto.NonlinearEquation;
-import csc.nonlinear.system.dto.Vector;
-import csc.nonlinear.system.function.Function;
+import csc.linear.system.domain.Matrix;
+import csc.linear.system.function.Function;
+import csc.linear.system.domain.NonlinearEquation;
+import csc.linear.system.domain.Vector;
 
 import java.util.*;
 

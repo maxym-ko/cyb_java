@@ -1,11 +1,11 @@
-package csc.nonlinear.system;
+package csc.linear.system;
 
-import csc.nonlinear.system.algorithm.JacobiAlgorithm;
-import csc.nonlinear.system.algorithm.TridiagonalMatrixAlgorithm;
-import csc.nonlinear.system.dto.Matrix;
-import csc.nonlinear.system.dto.NonlinearEquation;
-import csc.nonlinear.system.dto.Vector;
-import csc.nonlinear.system.util.NonlinearEquations;
+import csc.linear.system.algorithm.JacobiAlgorithm;
+import csc.linear.system.algorithm.TridiagonalMatrixAlgorithm;
+import csc.linear.system.domain.Matrix;
+import csc.linear.system.domain.Vector;
+import csc.linear.system.domain.NonlinearEquation;
+import csc.linear.system.util.NonlinearEquations;
 
 public class Main {
 

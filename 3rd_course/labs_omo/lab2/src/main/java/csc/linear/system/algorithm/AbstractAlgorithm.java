@@ -1,6 +1,6 @@
-package csc.nonlinear.system.algorithm;
+package csc.linear.system.algorithm;
 
-import csc.nonlinear.system.dto.Vector;
+import csc.linear.system.domain.Vector;
 
 public abstract class AbstractAlgorithm<T, R> implements Algorithm<T, R> {
     public abstract boolean checkConditions(T t);
