@@ -1,0 +1,80 @@
+package csc.nonlinear.system.algorithm;
+
+import csc.nonlinear.system.dto.Matrix;
+import csc.nonlinear.system.dto.NonlinearEquation;
+import csc.nonlinear.system.dto.Vector;
+
+import java.util.*;
+
+public class TridiagonalMatrixAlgorithm extends AbstractAlgorithm<NonlinearEquation, Matrix> {
+
+    @Override
+    public boolean checkConditions(NonlinearEquation equation) {
+        Matrix matrix = equation.getMatrix();
+        Vector vector = equation.getVector();
+
+        return vector.getSize() == matrix.getRow() && matrix.isQuadratic() && matrix.isTridiagonal();
+    }
+
+    @Override
+    Vector solve0(NonlinearEquation equation) {
+        transform(equation);
+
+        Matrix matrix = equation.getMatrix();
+        Vector vector = equation.getVector();
+        int eqSize = matrix.getRow();
+
+        List<Double> alphas = new ArrayList<>();
+        List<Double> betas = new ArrayList<>();
+
+        double alpha0 = matrix.get(0, 1) / matrix.get(0, 0);
+        double beta0 = vector.get(0) / matrix.get(0, 0);
+
+        alphas.add(alpha0);
+        betas.add(beta0);
+
+        for (int i = 1; i < eqSize - 1; i++) {
+            double alpha = matrix.get(i, i + 1) / (matrix.get(i, i) - alpha0 * matrix.get(i, i - 1));
+            alphas.add(alpha);
+
+            double beta = (vector.get(i) - alpha0 * beta0) / (matrix.get(i, i) - alpha0 * matrix.get(i, i - 1));
+            betas.add(beta);
+
+            alpha0 = alpha;
+            beta0 = beta;
+        }
+
+        List<Double> yN = new ArrayList<>();
+        double y0 = (vector.get(eqSize - 1) - alphas.get(alphas.size() - 1) * betas.get(betas.size() - 1)) /
+                    (matrix.get(eqSize - 1, eqSize - 1) - alphas.get(alphas.size() - 1) *
+                                                    matrix.get(eqSize - 1, eqSize - 2));
+        yN.add(y0);
+        for (int i = 1; i < eqSize; i++) {
+            double y = alphas.get(alphas.size() - i)  * y0 + betas.get(betas.size() - i);
+            yN.add(y);
+
+            y0 = y;
+        }
+
+        Collections.reverse(yN);
+
+        Vector res = new Vector(eqSize);
+        for (int i = 0; i < eqSize; i++) {
+            res.set(i, yN.get(i));
+        }
+
+        transform(equation);
+        return res;
+    }
+
+    private void transform(NonlinearEquation equation) {
+        Matrix matrix = equation.getMatrix();
+        Vector vector = equation.getVector();
+
+        int row = matrix.getRow();
+        for (int i = 0; i < row; i++) {
+            vector.set(i, -1 * vector.get(i));
+            matrix.set(i, i, -1 * matrix.get(i, i));
+        }
+    }
+}
