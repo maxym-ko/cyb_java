@@ -5,14 +5,16 @@ import csc.linear.system.algorithm.TridiagonalMatrixAlgorithm;
 import csc.linear.system.domain.Matrix;
 import csc.linear.system.domain.Vector;
 import csc.linear.system.domain.NonlinearEquation;
-import csc.linear.system.util.NonlinearEquations;
+import csc.linear.system.util.MatrixUtils;
+import csc.linear.system.util.VectorUtils;
 
 public class Main {
 
     public static void main(String[] args) {
-        NonlinearEquation nonlinearEquation = new NonlinearEquation(NonlinearEquations.generateTridiagonalDominantMatrix(4, 50, true),
-                                                                    NonlinearEquations.generateVector(4, 50, true),
-                                                                    0.001);
+        NonlinearEquation nonlinearEquation = new NonlinearEquation(
+            MatrixUtils.generateTridiagonalDominantMatrix(4, 50, true),
+            VectorUtils.generateVector(4, 50, true),
+            0.001);
         System.out.println(nonlinearEquation);
 
         TridiagonalMatrixAlgorithm tridiagonalMatrixAlgorithm = new TridiagonalMatrixAlgorithm();

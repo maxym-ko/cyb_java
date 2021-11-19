@@ -1,9 +1,8 @@
 package csc.linear.system.util;
 
 import csc.linear.system.domain.Matrix;
-import csc.linear.system.domain.Vector;
 
-public class NonlinearEquations {
+public class MatrixUtils {
 
     public static Matrix generateTridiagonalMatrix(int size, double max, boolean castToInt) {
         return new Matrix(generateTridiagonalMatrixArray(size, max, castToInt));
@@ -61,11 +60,4 @@ public class NonlinearEquations {
         return res;
     }
 
-    public static Vector generateVector(int size, double max, boolean castToInt) {
-        double[][] vector = new double[size][1];
-        for (int i = 0; i < size; i++) {
-            vector[i][0] = castToInt ? (int) (Math.random() * max + 1) : (Math.random() * max);
-        }
-        return new Vector(vector);
-    }
 }
