@@ -132,7 +132,43 @@ public class Matrix {
     }
 
     public void transformToDiagonal() {
+         // To be implemented
+    }
 
+    public Matrix subtract(Matrix m) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] -= m.get(i, j);
+            }
+        }
+
+        return this;
+    }
+
+    public Matrix multiply(double num) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] *= num;
+            }
+        }
+
+        return this;
+    }
+
+    public Vector multiply(Vector vector) {
+        if (row != vector.getSize()) {
+            throw new IllegalArgumentException("The number of matrix's row should equal the Vector size");
+        }
+
+        double[][] resultVector = new double[vector.getSize()][1];
+        for (int i = 0; i < row; i++) {
+            resultVector[i] = new double[1];
+            for (int j = 0; j < column; j++) {
+                resultVector[i][0] += matrix[i][j] * vector.get(j);
+            }
+        }
+
+        return new Vector(resultVector);
     }
 
     public int getRow() {

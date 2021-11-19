@@ -22,11 +22,21 @@ public class MatrixUtils {
         return new Matrix(matrix);
     }
 
-
     public static Matrix generateTridiagonalDominantMatrix(int size, double max, boolean castToInt) {
         double[][] matrix = generateTridiagonalMatrixArray(size, max, castToInt);
 
         domanateMatrix(size, max, matrix);
+
+        return new Matrix(matrix);
+    }
+
+    public static Matrix getIdentityMatrix(int size) {
+        double[][] matrix = new double[size][size];
+
+        for (int i = 0; i < size; i++) {
+            matrix[i] = new double[size];
+            matrix[i][i] = 1;
+        }
 
         return new Matrix(matrix);
     }

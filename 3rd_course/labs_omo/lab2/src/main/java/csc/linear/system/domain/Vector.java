@@ -23,6 +23,27 @@ public class Vector {
         this.vector = new Matrix(size, 1);
     }
 
+    public Vector multiply(double num) {
+        for (int i = 0; i < getSize(); i++) {
+            set(i, get(i) * num);
+        }
+
+        return this;
+    }
+
+    public double dotProduct(Vector vector) {
+        if (vector.getSize() != this.getSize()) {
+            throw new IllegalArgumentException("Both vector must have the same size");
+        }
+
+        double res = 0;
+        for (int i = 0; i < vector.getSize(); i++) {
+            res += this.get(i) * vector.get(i);
+        }
+
+        return res;
+    }
+
     public double get(int row) {
         return vector.get(row, 0);
     }
